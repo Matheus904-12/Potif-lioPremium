@@ -10,8 +10,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/CSS/style.css">
     <!-- Add favicon -->
-    <link rel="shortcut icon" href="IMAGE/eu.png" type="image/x-icon">
-
+    <link rel="shortcut icon" href="IMAGE/eu4.png" type="image/x-icon">
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
     <script src="https://kit.fontawesome.com/fd29053194.js" crossorigin="anonymous"></script>
 
     <title>Portfolio | Matheus Lucindo</title>
@@ -46,7 +46,7 @@
                 </ul>
             </div>
             <div class="nav-menu-btn">
-                <i class="fa-duotone fa-solid fa-bars fa-fade" onclick="myMenuFunction()"></i>
+                <i class="fi fi-br-bars-staggered" onclick="myMenuFunction()"></i>
             </div>
         </nav>
 
@@ -113,7 +113,7 @@
                     <div class="col">
                         <div class="skills-box">
                             <div class="skills-header">
-                                <h3>Front-End</h3>
+                                <h3>FrontEnd</h3>
                             </div>
                             <div class="skills-list">
                                 <span>HTML</span>
@@ -123,7 +123,7 @@
                         </div>
                         <div class="skills-box">
                             <div class="skills-header">
-                                <h3>Back-End</h3>
+                                <h3>BackEnd</h3>
                             </div>
                             <div class="skills-list">
                                 <span>PHP</span>
@@ -167,7 +167,6 @@
                         <i class="fa-solid fa-check"></i>
                         <h3>Formação</h3>
                         <label>Desenvolvimento de Sistemas - SENAI</label>
-                        <label>Informática - Pacote Office 365</label>
                     </div>
                 </div>
             </section>
@@ -189,16 +188,26 @@
                     </div>
                     <div class="col">
                         <div class="form-control">
-                            <div class="form-inputs">
-                                <input type="text" class="input-field" placeholder="Nome">
-                                <input type="text" class="input-field" placeholder="Email">
-                            </div>
-                            <div class="text-area">
-                                <textarea placeholder="Mensagem"></textarea>
-                            </div>
-                            <div class="form-button">
-                                <button class="btn">Enviar <i class="uil uil-message"></i></button>
-                            </div>
+                            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                                <!-- Web3Forms Access Key -->
+                                <input type="hidden" name="access_key" value="6fcc2d3d-5e0e-45d1-8796-744e52a1c64b" />
+                                <!-- Redirecionamento desabilitado -->
+                                <input type="hidden" name="redirect" value="">
+
+                                <div class="form-inputs">
+                                    <input type="text" name="name" class="input-field" placeholder="Nome" required />
+                                    <input type="email" name="email" class="input-field" placeholder="Email" required />
+                                </div>
+                                <div class="text-area">
+                                    <textarea name="message" placeholder="Mensagem" required></textarea>
+                                </div>
+                                <div class="form-button">
+                                    <button type="submit" class="btn" id="submitButton">
+                                        Enviar <i class="uil uil-message"></i>
+                                    </button>
+                                </div>
+                                <p id="responseMessage" class="hidden"></p>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -211,7 +220,7 @@
         <!-- --------------- RODAPÉ --------------- -->
         <footer>
             <div class="top-footer">
-                <p>Matheus Lucindo .</p>
+                <p>Matheus Lucindo.</p>
             </div>
             <div class="middle-footer">
                 <ul class="footer-menu">
@@ -235,7 +244,7 @@
                 <div class="icon"><a href="https://www.linkedin.com/in/matheus-lucindo-b35b68190/" target="_blank"><i
                             class="uil uil-linkedin-alt"></i></a></div>
                 <div class="icon"><a href="/PDF/CSV de Matheus Lucindo dos Santos.pdf"
-                        download="Currículo de Matheus Lucindo dos Santos.pdf" class="icon" title="Baixar Currículo">
+                        download="Currículo de Matheus Lucindo dos Santos.pdf" title="Baixar Currículo">
                         <i class="fa-solid fa-file-csv" style="color: #493f7c;"></i></a></div>
                 <div class="icon"><a href="https://github.com/Matheus904-12" target="_blank"><i
                             class="uil uil-github-alt"></i></a></div>
@@ -257,7 +266,7 @@
     <!-- ----- SCROLL REVEAL JS Link ----- -->
     <script src="https://unpkg.com/scrollreveal"></script>
 
-    <!-- ----- MAIN JS ----- -->
+    <!-- ----- JS ----- -->
     <script src="/JS/script.js"></script>
     <script src="/JS/enviar.js"></script>
 </body>

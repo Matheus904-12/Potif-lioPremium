@@ -1,38 +1,39 @@
-const form = document.getElementById('form');
-const result = document.getElementById('result');
+const form = document.getElementById("contactForm");
+const submitButton = document.getElementById("submitButton");
 
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const formData = new FormData(form);
-  const object = Object.fromEntries(formData);
-  const json = JSON.stringify(object);
-  result.innerHTML = "Please wait..."
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitButton.innerHTML = "Enviando...";
+    submitButton.disabled = true;
 
-    fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: json
-        })
-        .then(async (response) => {
-            let json = await response.json();
-            if (response.status == 200) {
-                result.innerHTML = "Form submitted successfully";
-            } else {
-                console.log(response);
-                result.innerHTML = json.message;
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            result.innerHTML = "Something went wrong!";
-        })
-        .then(function() {
-            form.reset();
-            setTimeout(() => {
-                result.style.display = "none";
-            }, 3000);
+    const formData = new FormData(form);
+    try {
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
         });
+
+        if (response.ok) {
+            submitButton.innerHTML = "Enviado!";
+            submitButton.disabled = false;
+
+            // Reseta o formulário após 2 segundos e volta o botão para o texto "Enviar"
+            setTimeout(() => {
+                submitButton.innerHTML = 'Enviar <i class="uil uil-message"></i>';
+                form.reset();
+            }, 5000);
+        } else {
+            submitButton.innerHTML = "Erro!";
+            setTimeout(() => {
+                submitButton.innerHTML = 'Enviar <i class="uil uil-message"></i>';
+                submitButton.disabled = false;
+            }, 5000);
+        }
+    } catch (error) {
+        submitButton.innerHTML = "Erro!";
+        setTimeout(() => {
+            submitButton.innerHTML = 'Enviar <i class="uil uil-message"></i>';
+            submitButton.disabled = false;
+        }, 5000);
+    }
 });
