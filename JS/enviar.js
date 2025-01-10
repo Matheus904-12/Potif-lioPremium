@@ -1,39 +1,38 @@
-(function () {
-    emailjs.init("vUAXa8ZYswtqNILSe"); // Substitua com o User ID correto
-})();
+const form = document.getElementById('form');
+const result = document.getElementById('result');
 
-document.getElementById("sendButton").addEventListener("click", function (event) {
-    event.preventDefault(); // Impedir o comportamento padrão de envio do formulário
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait..."
 
-    // Obter os valores dos campos
-    const nome = document.getElementById("nome").value;
-    const email = document.getElementById("email").value;
-    const mensagem = document.getElementById("mensagem").value;
-
-    // Verificação básica para garantir que todos os campos foram preenchidos
-    if (!nome || !email || !mensagem) {
-        alert("Por favor, preencha todos os campos!");
-        return;
-    }
-
-    // Parâmetros do template para envio via EmailJS
-    const templateParams = {
-        to_name: "Matheus Lucindo", // Nome fixo ou dinâmico
-        from_name: nome, // Nome do usuário
-        from_email: email, // E-mail do usuário
-        mensagem: mensagem, // Mensagem do usuário
-    };
-
-    // Enviar o e-mail
-    emailjs.send("service_l1slctl", "template_fh2gg0d", templateParams)
-        .then(
-            (response) => {
-                alert("E-mail enviado com sucesso!");
-                console.log("SUCCESS!", response.status, response.text);
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
-            (error) => {
-                alert("Erro ao enviar o e-mail. Tente novamente mais tarde.");
-                console.error("FAILED...", error);
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = "Form submitted successfully";
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
             }
-        );
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
 });
