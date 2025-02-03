@@ -310,6 +310,7 @@ nav {
     width: 380px;
     height: 380px;
     object-fit: contain;
+    scale: 2.3;
 }
 
 @keyframes imgFloat {
@@ -528,6 +529,84 @@ h3 {
     z-index: 2;
 }
 
+/* ----- Inverso ----- */
+
+.project-container2 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.project-box2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    height: 300px;
+    background: var(--color-white);
+    border-radius: 20px;
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    overflow: hidden;
+}
+
+.project-box2>i {
+    font-size: 50px;
+    color: #00297f;
+    margin-bottom: 25px;
+}
+
+.project-box2 label {
+    font-size: 15px;
+    color: #777;
+}
+
+/* Estilo do botão de visitar projeto */
+.project-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: black;
+    position: relative;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    top: 20px;
+}
+
+.project-btn:hover {
+    color: #333;
+    /* Leve mudança de cor no hover */
+}
+
+.project-btn::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.project-btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+
+
+
+
 /* ----- CONTACT BOX ----- */
 .contact-info {
     position: relative;
@@ -614,39 +693,10 @@ textarea {
     justify-content: center;
     background: var(--second-color);
     color: var(--color-white);
-    transition: all 0.2s;
 }
 
 .form-button>.btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.form-button>.btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.form-button>.btn::after {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all 0.4s;
-}
-
-.form-button>.btn::after {
-    background-color: #fff;
-}
-
-.form-button>.btn:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
+    background: #000000;
 }
 
 .form-button i {
@@ -816,6 +866,10 @@ footer {
         width: 80%;
     }
 
+    .project-box2 {
+        width: 80%;
+    }
+
 }
 
 /* ----- MEDIA QUERY == 540px / RESPONSIVE ----- */
@@ -826,6 +880,10 @@ footer {
     }
 
     .project-box {
+        width: 100%;
+    }
+
+    .project-box2 {
         width: 100%;
     }
 
